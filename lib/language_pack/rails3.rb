@@ -107,7 +107,6 @@ private
         end
 
         sync = rake.task("assets:sync")
-        return true unless sync.is_defined?
 
         puts "Running assets:sync"
 
