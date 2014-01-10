@@ -105,6 +105,20 @@ private
           log "assets_precompile", :status => "failure"
           error "Precompiling assets failed."
         end
+
+        sync = rake.task("assets:sync")
+        return true unless sync.is_defined?
+
+        puts "Running assets:sync"
+
+        sync.invoke
+        if sync.success?
+          log "assets_sync", :status => "success"
+          puts "Asset sync completed (#{"%.2f" % sync.time}s)"
+        else
+          log "assets_sync", :status => "failure"
+          error "Syncing assets failed."
+        end
       end
     end
   end
